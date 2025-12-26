@@ -15,12 +15,12 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y libopencv-dev cmake g++
 
-    - name: Configure and Build
-      # Використовуємо один крок для надійності шляхів
+    - name: Build and Configure
       run: |
-        ls -R # Це допоможе побачити структуру папок у логах, якщо знову впаде
-        cd Lab4
-        mkdir -p models
+        # Знаходимо де саме лежить CMakeLists.txt і заходимо туди
+        CMAKE_DIR=$(find . -name "CMakeLists.txt" -not -path "*/build/*" | head -n 1 | xargs dirname)
+        echo "Found CMake project in: $CMAKE_DIR"
+        cd $CMAKE_DIR
         mkdir -p build
         cd build
         cmake ..
