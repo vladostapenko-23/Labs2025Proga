@@ -15,19 +15,13 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y libopencv-dev cmake g++
 
-    - name: Prepare environment
+    - name: Configure and Build
+      # Використовуємо один крок для надійності шляхів
       run: |
+        ls -R # Це допоможе побачити структуру папок у логах, якщо знову впаде
         cd Lab4
-        mkdir -p models  # Створюємо порожню папку моделей для успішної конфігурації
-
-    - name: Configure CMake
-      run: |
-        cd Lab4
+        mkdir -p models
         mkdir -p build
         cd build
         cmake ..
-
-    - name: Build
-      run: |
-        cd Lab4/build
         make
