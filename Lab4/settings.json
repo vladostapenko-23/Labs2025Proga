@@ -1,0 +1,15 @@
+{
+  "camera": {
+    "id": 0,
+    "width": 640,
+    "height": 480
+  },
+  "model": {
+    "proto": "models/deploy.prototxt",
+    "weights": "models/res10_300x300_ssd_iter_140000.caffemodel",
+    "threshold": 0.5
+  },
+  "logger": {
+    "level": "DEBUG"
+  }
+}
