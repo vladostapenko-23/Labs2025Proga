@@ -1,0 +1,27 @@
+name: Build Project
+
+on: [push, pull_request]
+
+jobs:
+  build-linux:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Install OpenCV & Tools
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y libopencv-dev cmake g++
+
+    - name: Build and Configure
+      run: |
+        # Знаходимо де саме лежить CMakeLists.txt і заходимо туди
+        CMAKE_DIR=$(find . -name "CMakeLists.txt" -not -path "*/build/*" | head -n 1 | xargs dirname)
+        echo "Found CMake project in: $CMAKE_DIR"
+        cd $CMAKE_DIR
+        mkdir -p build
+        cd build
+        cmake ..
+        make
